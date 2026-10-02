@@ -1,0 +1,50 @@
+% Comparison on ShanghaiTech Part A -- requires \usepackage{booktabs,multirow}
+%
+% HOW TO FINISH THIS TABLE
+%  * [verify]  = value copied from the draft / recalled, NOT yet checked against the original paper.
+%                Check each against the paper's own Part A table and remove the marker.
+%  * --        = Params / FLOPs not computed here; fill in from the original paper ONLY if it states
+%                them at 1024x768 input, otherwise leave "--" (FLOPs at other resolutions are not
+%                comparable).
+%  * $^\ddagger$ = Params / GFLOPs computed by us with ptflops at a 1024x768 input (FLOPs = 2 x MACs),
+%                 from a faithful re-implementation of the architecture.
+%  * RMSC-Net MAE / RMSE: paste from the notebook's "Paper table row" cell (results/clean_test_metrics.json).
+%
+\begin{table}[t]
+\centering
+\caption{Comparison on ShanghaiTech Part A. $\downarrow$ = lower is better. Params in millions;
+GFLOPs for a $1024\times768$ input. $^\ddagger$ computed by us with the same tool and input size for
+all such entries. Backbones: VGG-16/19 (V16/V19), ResNet-50 (R50), MobileNet (Mob).}
+\label{tab:sha_comparison}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llcccrr}
+\toprule
+Method & Year & Backbone & MAE$\downarrow$ & RMSE$\downarrow$ & Params (M)$\downarrow$ & GFLOPs$\downarrow$ \\
+\midrule
+\multicolumn{7}{l}{\textit{Heavy models}} \\
+CSRNet~\cite{csrnet}        & 2018 & V16  & 68.2 & 115.0 & 16.26$^\ddagger$ & 651.3$^\ddagger$ \\
+BL~\cite{bl}                & 2019 & V19  & 62.8 & 101.8 & 21.50$^\ddagger$ & 649.6$^\ddagger$ \\
+DADNet~\cite{dadnet}        & 2019 & V16  & 64.2 [verify] & 99.9 [verify] & -- & -- \\ % draft had 66.4 / 106.5
+CASA-Crowd~\cite{casa}      & 2019 & V16  & 69.2 [verify] & 113.1 [verify] & -- & -- \\
+DM-Count~\cite{dmcount}     & 2020 & V19  & 59.7 & 95.7  & 21.50$^\ddagger$ & 649.6$^\ddagger$ \\
+RSANet~\cite{rsanet}        & 2020 & R50  & 66.9 [verify] & 106.7 [verify] & -- & -- \\
+P2PNet~\cite{p2pnet}        & 2021 & V16  & 52.7 & 85.1  & -- & -- \\
+CCTrans~\cite{cctrans}      & 2021 & Twins & 52.3 [verify] & 84.9 [verify] & -- & -- \\ % draft had 61.2 / 98.0 and "Swin"
+Multi-col.~\cite{multicol}  & 2021 & V16  & 65.1 [verify] & 105.5 [verify] & -- & -- \\ % use the paper's own method name
+DTCC~\cite{dtcc}            & 2023 & Swin & 59.1 [verify] & 96.3 [verify] & -- & -- \\
+MHANet~\cite{mhanet}        & 2023 & R50  & 62.4 [verify] & 100.2 [verify] & -- & -- \\
+MS-Dilated~\cite{msdilated} & 2023 & V16  & 63.8 [verify] & 101.4 [verify] & -- & -- \\ % use the paper's own method name
+STNet~\cite{stnet}          & 2023 & V16  & 60.7 [verify] & 96.1 [verify] & -- & -- \\
+\midrule
+\multicolumn{7}{l}{\textit{Lightweight models}} \\
+MCNN~\cite{mcnn}            & 2016 & --   & 110.2 & 173.2 & 0.13$^\ddagger$ & 42.9$^\ddagger$ \\
+SANet~\cite{sanet}          & 2018 & --   & 67.0 & 104.5 & 0.91 & -- \\
+MobileCount~\cite{mobilecount} & 2020 & Mob & 89.4 [verify] & 146.0 [verify] & 3.4 [verify] & -- \\
+SD-Net~\cite{sdnet}         & 2021 & --   & 74.1 [verify] & 118.3 [verify] & -- & -- \\
+MLRNet~\cite{mlrnet}        & 2022 & Mob  & 71.3 [verify] & 115.2 [verify] & -- & -- \\
+LigMSANet~\cite{ligmsanet}  & 2023 [verify] & -- [verify] & 57.4 [verify] & 92.5 [verify] & -- & -- \\
+\midrule
+\textbf{RMSC-Net (ours)}    & 2025 & Mob  & \textbf{TBD} & \textbf{TBD} & \textbf{1.65}$^\ddagger$ & \textbf{16.1}$^\ddagger$ \\
+\bottomrule
+\end{tabular}
+\end{table}
